@@ -2,7 +2,7 @@
 
 Convert DaVinci Resolve timeline marker EDL exports into YouTube chapter timestamps.
 
-This project includes a Windows GUI app and a portable `.exe` build. It is meant for editors who already export timeline markers from Resolve and want clean chapter lines like:
+This project provides a Windows desktop app and a portable `.exe` for editors who want to turn Resolve timeline markers into clean YouTube chapter lines such as:
 
 ```text
 0:00 Intro
@@ -10,14 +10,32 @@ This project includes a Windows GUI app and a portable `.exe` build. It is meant
 1:44 DLSS 5
 ```
 
-## What It Does
+## Current Release
 
-- Loads a DaVinci Resolve marker EDL file
-- Parses timeline marker positions into YouTube timestamp format
+Latest release:
+- [`v1.0.1 - UI and workflow improvements`](https://github.com/technicallyalex/resolve-edl-to-youtube/releases/tag/v1.0.1)
+
+Download:
+- `ResolveEdlToYouTubeChapters.exe` from the repo's Releases page
+
+## What The App Does
+
+- Loads DaVinci Resolve marker EDL files
+- Converts timeline marker positions into YouTube timestamp format
 - Uses marker names or marker comments as chapter titles
-- Optionally prepends a `0:00` chapter like `Intro`
-- Lets you copy the generated chapters to the clipboard
-- Lets you save the generated chapters to a plain text file
+- Optionally prepends a synthetic `0:00` chapter
+- Copies generated chapters to the clipboard
+- Exports generated chapters to a plain text file
+
+## Current App Behavior
+
+- Selecting an `.edl` file automatically loads it and generates chapters
+- Editing options automatically refreshes the chapter output
+- The app can be launched with an EDL path argument
+- The default display mode is `Light`
+- A `View` menu lets you switch between `Light`, `Dark`, and `System`
+- Thin scrollbars auto-hide unless content overflows
+- The status area only appears when there is something to report
 
 ## Included Files
 
@@ -26,29 +44,28 @@ This project includes a Windows GUI app and a portable `.exe` build. It is meant
 - `resolve_edl_to_youtube_gui.py`
   Python source for the GUI app
 - `build_portable_exe.bat`
-  Rebuild script for the portable `.exe`
+  Rebuild script for the portable executable
 
 ## Recommended Use
 
-Most people should just use the portable executable:
+For most users:
 
-1. Download `ResolveEdlToYouTubeChapters.exe`
-2. Run it
-3. Click `Browse` and select your Resolve marker `.edl` file
-4. The file loads automatically
-5. Adjust options if needed
-6. Click `Generate Chapters`
-7. Use `Copy to Clipboard` or `Save as Text File`
+1. Download `ResolveEdlToYouTubeChapters.exe` from Releases.
+2. Run the app.
+3. Click `Browse` and select your Resolve marker `.edl` file.
+4. The file loads and chapters generate automatically.
+5. Adjust options if needed.
+6. Use `Copy to Clipboard` or `Save as Text File`.
 
-## Input Format
+## Supported Input
 
-The app is built for DaVinci Resolve timeline marker EDL exports, including marker lines in formats like:
+The app is built for DaVinci Resolve timeline marker EDL exports, including marker lines such as:
 
 ```text
 |C:ResolveColorBlue |M:Battlefield |D:1
 ```
 
-and older `MARKER:` style lines.
+It also supports older `MARKER:` style lines.
 
 ## Options
 
@@ -58,46 +75,58 @@ and older `MARKER:` style lines.
   Uses the marker comment instead of the marker name
 - `Dedupe consecutive lines`
   Removes repeated adjacent chapter lines
-- `Prepend 0:00 title`
-  Adds a first chapter at `0:00` when the first marker starts later
+- `Prepend 0:00 chapter`
+  Adds a synthetic first chapter when the first marker starts later
+- `Intro` title field
+  Sets the label used for the synthetic `0:00` chapter
+
+## Display Modes
+
+From the menu bar:
+
+- `View > Light`
+- `View > Dark`
+- `View > System`
+
+`System` follows the Windows app theme setting while the app is running.
 
 ## Launching With a File Path
 
-The app can also open an EDL file directly from the command line:
+The app can open an EDL directly from the command line:
 
 ```powershell
 .\ResolveEdlToYouTubeChapters.exe "C:\path\to\Edit.edl"
 ```
 
-## Running the Python Version
+## Running From Python
 
-If you want to run the source instead of the `.exe`:
+Run the source version:
 
 ```powershell
 python .\resolve_edl_to_youtube_gui.py
 ```
 
-You can also pass an EDL file path:
+Or pass an EDL file path:
 
 ```powershell
 python .\resolve_edl_to_youtube_gui.py "C:\path\to\Edit.edl"
 ```
 
-## Building the Portable EXE
+## Building The Portable EXE
 
-To rebuild the executable from source:
+To rebuild the Windows executable:
 
 ```powershell
 .\build_portable_exe.bat
 ```
 
-This project was built and packaged on Windows.
-
 ## Notes
 
-- The app is designed for Windows
-- The `.exe` is intended to be portable and run without a separate Python install
-- If Resolve changes its EDL marker export format in the future, the parser may need updates
+- Built for Windows
+- Designed for DaVinci Resolve timeline marker EDL exports
+- Portable single-file executable
+- The app includes custom Tcl/Tk packaging support for reliable Windows builds
+- If Resolve changes its EDL marker export format, the parser may need updates
 
 ## Repo Purpose
 
