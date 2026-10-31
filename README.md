@@ -135,4 +135,18 @@ This repository exists so people can:
 - download a ready-to-run Windows executable
 - inspect the Python source
 - rebuild the executable themselves
-- adapt the parser for their own Resolve workflow
+- adapt the parser for their own Resolve workflow under the [MIT license](LICENSE)
+
+## AI disclosure
+
+The maintainer confirmed on 2026-10-31 that ChatGPT was used for this project. The available records do not establish the specific tasks, affected files, model versions, or proportion of AI-generated material.
+
+OpenAI Codex was used for the 2026-10-31 repository audit and to draft these disclosure and licensing documentation changes. This describes this audit only and does not establish earlier Codex use.
+
+## License and third-party components
+
+The project's source and documentation are [MIT licensed](LICENSE). You may modify, fork and redistribute covered material under those terms. Keep the copyright notice, including the original repository URL, and the permission notice with copies or substantial portions.
+
+Python, Tcl/Tk, PyInstaller-related files and other components in the portable executable retain their own terms. The MIT license does not relicense them or grant rights to DaVinci Resolve, YouTube, third-party trademarks, or your input media. See [dependency, attribution and build-provenance notes](docs/THIRD_PARTY_NOTICES.md).
+
+The checked-in build script references `runtime_tkinter.py` and a `hooks/` directory that are absent from the reviewed repository. It also upgrades PyInstaller without pinning a version. The published executable cannot currently be reproduced solely from these checked-in build materials; its complete dependency versions and notice coverage remain unresolved.
